@@ -7,6 +7,7 @@ namespace EdCon.MiniGameTemplate.UI
     public class UISettings : MonoBehaviour
     {
         [SerializeField] private MovableUIElement[] movableElements;
+        [SerializeField] private RectTransform highlightRect;
 
         [Header("Sliders")] 
         [SerializeField] private CanvasGroup scaleSliderCanvasGroup;
@@ -27,7 +28,7 @@ namespace EdCon.MiniGameTemplate.UI
         {
             foreach (var element in movableElements)
             {
-                element.Initialize(OnElementSelect);
+                element.Initialize(OnElementSelect, highlightRect);
                 elements.Add(element.ElementName, element);
             }
         }
@@ -53,6 +54,7 @@ namespace EdCon.MiniGameTemplate.UI
             currentElement = element;
             SetSlidersValues(element.Scale, element.Alpha);
             ShowSliders(true);
+            highlightRect.gameObject.SetActive(true);
         }
 
         private void SetSlidersValues(float scale, float opacity)
@@ -70,6 +72,7 @@ namespace EdCon.MiniGameTemplate.UI
         public void SaveLayout()
         {
             ShowSliders(false);
+            highlightRect.gameObject.SetActive(false);
         }
     }
 }

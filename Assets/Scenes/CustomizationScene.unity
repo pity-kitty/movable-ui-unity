@@ -343,6 +343,7 @@ MonoBehaviour:
   - {fileID: 444795108}
   - {fileID: 2103814976}
   - {fileID: 1113451746}
+  highlightRect: {fileID: 892716928}
   scaleSliderCanvasGroup: {fileID: 4741185883030242676}
   scaleSlider: {fileID: 4741185883030242675}
   opacitySliderCanvasGroup: {fileID: 1628644331}
@@ -983,9 +984,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100, y: 140}
+  m_AnchoredPosition: {x: 280, y: 320}
   m_SizeDelta: {x: 355, y: 355}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &444795106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,6 +1039,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elementName: LeftJoystick
   elementCanvasGroup: {fileID: 444795109}
+  elementRect: {fileID: 444795105}
 --- !u!225 &444795109
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1659,6 +1661,7 @@ GameObject:
   - component: {fileID: 892716928}
   - component: {fileID: 892716930}
   - component: {fileID: 892716929}
+  - component: {fileID: 892716931}
   m_Layer: 5
   m_Name: img_highlighters
   m_TagString: Untagged
@@ -1723,6 +1726,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892716927}
   m_CullTransparentMesh: 1
+--- !u!225 &892716931
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892716927}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &1110274795
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,9 +1868,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -125}
+  m_AnchoredPosition: {x: -200, y: -225}
   m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1113451744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,6 +1923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elementName: HealButton
   elementCanvasGroup: {fileID: 1113451747}
+  elementRect: {fileID: 1113451743}
 --- !u!225 &1113451747
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2792,9 +2808,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -100, y: 200}
+  m_AnchoredPosition: {x: -200, y: 200}
   m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 1, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2103814974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2847,6 +2863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elementName: FireButton
   elementCanvasGroup: {fileID: 2103814977}
+  elementRect: {fileID: 2103814973}
 --- !u!225 &2103814977
 CanvasGroup:
   m_ObjectHideFlags: 0
