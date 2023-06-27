@@ -654,8 +654,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toastText: {fileID: 1465128571}
-  animationSpeed: 1
-  animationDelay: 3
+  animationSpeed: 0.6
+  animationDelay: 2
   toastAnchor: {fileID: 702454374}
 --- !u!1 &228883633
 GameObject:

@@ -1,11 +1,16 @@
 using System.Collections.Generic;
+using System.IO;
 using EdCon.MiniGameTemplate.Extensions;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace EdCon.MiniGameTemplate.UI
 {
     public class UISettings : MonoBehaviour
     {
+        private const string DefaultLayoutFileName = "default_layout.json";
+        private const string CustomLayoutFileName = "custom_layout.json";
+        
         [SerializeField] private MovableUIElement[] movableElements;
         [SerializeField] private RectTransform highlightRect;
 
@@ -17,11 +22,17 @@ namespace EdCon.MiniGameTemplate.UI
 
         private Dictionary<string, MovableUIElement> elements = new Dictionary<string, MovableUIElement>();
         private MovableUIElement currentElement;
+        private string defaultFilePath;
+        private string customFilePath;
 
         private void Start()
         {
+            defaultFilePath = Path.Combine(Application.persistentDataPath, DefaultLayoutFileName);
+            customFilePath = Path.Combine(Application.persistentDataPath, CustomLayoutFileName);
             InitializeUIElements();
             InitializeSubscriptions();
+            if (!IOService.CheckFileExists(defaultFilePath)) SaveToFile(defaultFilePath);
+            else if (IOService.CheckFileExists(customFilePath)) LoadFromFile(customFilePath);
         }
 
         private void InitializeUIElements()
@@ -69,10 +80,52 @@ namespace EdCon.MiniGameTemplate.UI
             opacitySliderCanvasGroup.ShowCanvasGroup(state);
         }
 
+        private void SaveToFile(string path)
+        {
+            var elementsCount = movableElements.Length;
+            var elementsProperties = new UIElementProperties[elementsCount];
+            for (int i = 0; i < elementsCount; i++)
+            {
+                var element = movableElements[i];
+                var position = element.transform.position;
+                var property = new UIElementProperties
+                {
+                    Name = element.ElementName,
+                    PositionX = position.x,
+                    PositionY = position.y,
+                    Scale = element.Scale,
+                    Alpha = element.Alpha
+                };
+                elementsProperties[i] = property;
+            }
+
+            var jsonData = JsonConvert.SerializeObject(elementsProperties);
+            IOService.SaveData(path, jsonData);
+        }
+
+        private void LoadFromFile(string filePath)
+        {
+            var jsonData = IOService.ReadData(filePath);
+            var elementsProperties = JsonConvert.DeserializeObject<UIElementProperties[]>(jsonData);
+            foreach (var property in elementsProperties)
+            {
+                if (elements.TryGetValue(property.Name, out var element))
+                {
+                    element.SetProperties(property);
+                }
+            }
+        }
+
         public void SaveLayout()
         {
+            SaveToFile(customFilePath);
             ShowSliders(false);
             highlightRect.gameObject.SetActive(false);
+        }
+
+        public void LoadDefaultLayout()
+        {
+            LoadFromFile(defaultFilePath);
         }
     }
 }

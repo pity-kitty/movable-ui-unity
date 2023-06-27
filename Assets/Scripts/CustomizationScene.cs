@@ -27,6 +27,7 @@ namespace EdCon.MiniGameTemplate
         {
             backButton.onClick.AddListener(OnLoadScene);
             saveButton.onClick.AddListener(SaveButtonClick);
+            defaultButton.onClick.AddListener(DefaultButtonClick);
         }
         
         private void OnLoadScene()
@@ -38,6 +39,11 @@ namespace EdCon.MiniGameTemplate
         {
             uiSettings.SaveLayout();
             toastService.ShowToast(SaveMessage);
+        }
+
+        private void DefaultButtonClick()
+        {
+            uiSettings.LoadDefaultLayout();
         }
     }
 }

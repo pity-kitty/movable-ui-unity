@@ -33,12 +33,22 @@ namespace EdCon.MiniGameTemplate.UI
         {
             elementCanvasGroup.alpha = value;
         }
+
+        public void SetProperties(UIElementProperties properties)
+        {
+            var elementTransform = transform;
+            var scaleValue = properties.Scale;
+            elementTransform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
+            elementCanvasGroup.alpha = properties.Alpha;
+            var position = new Vector3(properties.PositionX, properties.PositionY, 0f);
+            elementTransform.position = position;
+        }
         
         public void OnDrag(PointerEventData eventData)
         {
             var pointerDelta = new Vector3(eventData.delta.x, eventData.delta.y, 0f);
             transform.position += pointerDelta;
-            highlightRect.position += elementRect.position;
+            highlightRect.position = elementRect.position;
         }
 
         public void OnSelect(BaseEventData eventData)
