@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace EdCon.MiniGameTemplate
 {
@@ -8,9 +9,22 @@ namespace EdCon.MiniGameTemplate
     /// </summary>
     public class Main : MonoBehaviour
     {
-        public void OnLoadScene(string sceneName)
+        [SerializeField] private string customizationSceneName;
+        [SerializeField] private Button customizationSceneButton;
+
+        private void Start()
         {
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+            InitializeSubscriptions();
+        }
+
+        private void InitializeSubscriptions()
+        {
+            customizationSceneButton.onClick.AddListener(OnLoadScene);
+        }
+        
+        private void OnLoadScene()
+        {
+            SceneManager.LoadScene(customizationSceneName, LoadSceneMode.Single);
         }
     }
 }
