@@ -116,16 +116,23 @@ namespace EdCon.MiniGameTemplate.UI
             }
         }
 
+        private void HideSelection()
+        {
+            currentElement = null;
+            ShowSliders(false);
+            highlightRect.gameObject.SetActive(false);
+        }
+
         public void SaveLayout()
         {
             SaveToFile(customFilePath);
-            ShowSliders(false);
-            highlightRect.gameObject.SetActive(false);
+            HideSelection();
         }
 
         public void LoadDefaultLayout()
         {
             LoadFromFile(defaultFilePath);
+            HideSelection();
         }
     }
 }
